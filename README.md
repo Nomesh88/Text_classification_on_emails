@@ -110,28 +110,28 @@
     data["filtered_text"] = data.Text.apply(lambda x : filter_text(x, stop)) 
     data.head()
 # top 10 words to claasify the text into crime class
-  all_text = " ".join(data[data.Class == "Crime"].filtered_text) 
-  count = pd.DataFrame(all_text.split(), columns = ['words'])
-  top_10 = count[count['words'].isin(list(count.words.value_counts()[:10].index[:10]))]
-  print(top_10)
+        all_text = " ".join(data[data.Class == "Crime"].filtered_text) 
+        count = pd.DataFrame(all_text.split(), columns = ['words'])
+        top_10 = count[count['words'].isin(list(count.words.value_counts()[:10].index[:10]))]
+        print(top_10)
  # top 10 words to claasify the text into politics class
-  all_text = " ".join(data[data.Class == "Politics"].filtered_text)
-  count = pd.DataFrame(all_text.split(), columns = ['words'])
-  top_10 = count[count['words'].isin(list(count.words.value_counts()[:10].index[:10]))]
-  print(top_10)
+        all_text = " ".join(data[data.Class == "Politics"].filtered_text)
+        count = pd.DataFrame(all_text.split(), columns = ['words'])
+        top_10 = count[count['words'].isin(list(count.words.value_counts()[:10].index[:10]))]
+        print(top_10)
 ## top 10 words to claasify the text into science class
   all_text = " ".join(data[data.Class == "Science"].filtered_text)
   count = pd.DataFrame(all_text.split(), columns = ['words'])
   top_10 = count[count['words'].isin(list(count.words.value_counts()[:10].index[:10]))]
   print(top_10)
 # #vectorizing the data 
-  tfidf = TfidfVectorizer(lowercase=False)
-  train_vec = tfidf.fit_transform(data['filtered_text'])
-  train_vec.shape
+        tfidf = TfidfVectorizer(lowercase=False)
+        train_vec = tfidf.fit_transform(data['filtered_text'])
+        train_vec.shape
 # #classifying the classes and assigning some values
-  data['classification'] = data['Class'].replace(['Crime','Politics','Science'],[0,1,2])
+      data['classification'] = data['Class'].replace(['Crime','Politics','Science'],[0,1,2])
 # splitting and train of the data
-x_train, x_val, y_train, y_val = train_test_split(train_vec,data['classification'], stratify=data['classification'], test_size=0.2)
+      x_train, x_val, y_train, y_val = train_test_split(train_vec,data['classification'], stratify=data['classification'], test_size=0.2)
 # model
       C = np.arange(0, 1, 0.001)
       max_iter = range(100, 500)
